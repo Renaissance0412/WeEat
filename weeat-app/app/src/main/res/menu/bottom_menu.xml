@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <item
+        android:id="@+id/timeline"
+        android:title="Track"
+        android:icon="@drawable/bottom_timeline"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/storage"
+        android:title="Storage"
+        android:icon="@drawable/bottom_todolist"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/gpt"
+        android:title="Chats"
+        android:icon="@drawable/bottom_gpt"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/overview"
+        android:title="Overview"
+        android:icon="@drawable/bottom_overview"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/setting"
+        android:title="Settings"
+        android:icon="@drawable/bottom_setting"
+        android:visible="true"
+        />
+</menu>

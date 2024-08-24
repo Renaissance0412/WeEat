@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bubble_body_tag" type="id"/>
+    <item name="bubble_view_circle_tag" type="id"/>
+    <item name="item_for_view_holder" type="id"/>
+    <item name="cur_day_test" type="id"/>
+    <item name="cur_time_test" type="id"/>
+</resources>

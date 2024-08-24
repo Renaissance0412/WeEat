@@ -1,0 +1,15 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="RulerView">
+        <attr name="indicateColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="integer"/>
+        <attr name="begin" format="integer"/>
+        <attr name="end" format="integer"/>
+        <attr name="indicateWidth" format="integer"/>
+        <attr name="indicatePadding" format="integer"/>
+    </declare-styleable>
+</resources>
