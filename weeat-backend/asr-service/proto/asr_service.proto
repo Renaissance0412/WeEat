@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package asr;
+
+message ASRRequest {
+    bytes audio = 2;
+}
+
+message ASRResponse {
+    string transcript = 2;
+}
+
+// Export asr service for client
+service ASRService {
+    // ASR with stream response method
+    rpc StreamRecognize(ASRRequest) returns (stream ASRResponse);
+
+    // ASR with sync response method
+    rpc SyncRecognize(ASRRequest) returns (ASRResponse);
+}

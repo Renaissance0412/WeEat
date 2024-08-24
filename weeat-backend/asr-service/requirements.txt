@@ -1,0 +1,7 @@
+openai-whisper
+grpcio
+grpcio-tools
+loguru
+uuid
+etcd3
+pyyaml

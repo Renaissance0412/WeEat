@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package chat;
+
+message ChatMessage {
+    string user_id = 1;
+    string message = 2;
+    repeated ChatMessage history = 3;
+}
+
+message ChatMessageRequest {
+    string user_id = 1;
+    string message = 2;
+    repeated ChatMessage history = 3;
+}
+
+message ChatMessageResponse {
+    string message = 1;
+}
+
+// Exporty llm service for client
+service LLMService {
+    // Chat with stream response method
+    rpc StreamChat(ChatMessageRequest) returns (stream ChatMessageResponse);
+    // Chat with sync response method
+    rpc SyncChat(ChatMessageRequest) returns (ChatMessageResponse);
+}

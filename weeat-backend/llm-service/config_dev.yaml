@@ -1,0 +1,15 @@
+# Rpc register key
+Name: llm-service.rpc
+ContainerName: 127.0.0.1
+Host: 0.0.0.0
+Port: 50043
+
+OPENAI:
+  API_KEY: "EMPTY"
+  API_BASE: "http://localhost:8000/v1"
+  # MODEL: "facebook/opt-125m"
+  MODEL: "Meta-Llama-3.1-8B-Instruct"
+
+ETCD:
+  Host: 127.0.0.1
+  Port: 2379

@@ -1,0 +1,24 @@
+# Rpc register key
+Name: rag-service.rpc
+ContainerName: 127.0.0.1
+Host: 0.0.0.0
+Port: 50042
+
+TIDB:
+  DSN: "mysql+pymysql://username:host:4000/weeat?ssl_ca=/etc/ssl/certs/ca-certificates.crt&ssl_verify_cert=true&ssl_verify_identity=true"
+  CREATE_TABLE: True
+
+OPENAI:
+  API_KEY: "EMPTY"
+  API_BASE: "http://localhost:8000/v1"
+  MODEL: "Meta-Llama-3.1-8B-Instruct"
+  EMBEDDING_MODEL: "maidalun1020/bce-embedding-base_v1"
+
+# Your web search API key
+BING:
+  API_KEY:
+  ENDPOINT:
+
+ETCD:
+  Host: 127.0.0.1
+  Port: 2379

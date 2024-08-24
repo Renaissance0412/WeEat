@@ -1,0 +1,560 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "host": "127.0.0.1:8888",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/asr/stream": {
+      "post": {
+        "operationId": "ASRStreamHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ASRResponse"
+            }
+          }
+        },
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/asr/sync": {
+      "post": {
+        "operationId": "ASRSyncHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ASRResponse"
+            }
+          }
+        },
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/llm/chat/stream": {
+      "post": {
+        "operationId": "LLMStreamChatHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " ChatMessageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatMessageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/llm/chat/sync": {
+      "post": {
+        "operationId": "LLMSyncChatHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " ChatMessageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatMessageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/login": {
+      "post": {
+        "operationId": "LoginHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " LoginRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/rag/chat/stream": {
+      "post": {
+        "operationId": "RAGStreamChatHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " RAGChatMessageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RAGChatMessageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/rag/chat/sync": {
+      "post": {
+        "operationId": "RAGSyncChatHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RAGChatMessageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " RAGChatMessageRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RAGChatMessageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/rag/context": {
+      "post": {
+        "operationId": "RAGCreateContextHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RAGCreateContextResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " RAGCreateContextRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RAGCreateContextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/rag/flush": {
+      "post": {
+        "operationId": "RAGFlushContextHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RAGFlushContextResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " RAGFlushContextRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RAGFlushContextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/rag/user": {
+      "post": {
+        "operationId": "RAGCreateUserHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RAGCreateUserResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " RAGCreateUserRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RAGCreateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    },
+    "/v1/recognition": {
+      "post": {
+        "operationId": "RecognitionHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RecognitionResponse"
+            }
+          }
+        },
+        "tags": [
+          "weeat-api"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ASRRequest": {
+      "type": "object",
+      "title": "ASRRequest"
+    },
+    "ASRResponse": {
+      "type": "object",
+      "properties": {
+        "transcript": {
+          "type": "string"
+        }
+      },
+      "title": "ASRResponse",
+      "required": [
+        "transcript"
+      ]
+    },
+    "ChatMessage": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "ChatMessage",
+      "required": [
+        "user_id",
+        "message"
+      ]
+    },
+    "ChatMessageRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        }
+      },
+      "title": "ChatMessageRequest",
+      "required": [
+        "user_id",
+        "message"
+      ]
+    },
+    "ChatMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "ChatMessageResponse",
+      "required": [
+        "message"
+      ]
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "LoginRequest",
+      "required": [
+        "user_id",
+        "token"
+      ]
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_expire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refresh_after": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LoginResponse",
+      "required": [
+        "access_token",
+        "access_expire",
+        "refresh_after"
+      ]
+    },
+    "RAGChatMessageRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "context_id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "addition": {
+          "type": "string"
+        }
+      },
+      "title": "RAGChatMessageRequest",
+      "required": [
+        "user_id",
+        "context_id",
+        "message"
+      ]
+    },
+    "RAGChatMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "RAGChatMessageResponse",
+      "required": [
+        "message"
+      ]
+    },
+    "RAGCreateContextRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "title": "RAGCreateContextRequest",
+      "required": [
+        "user_id"
+      ]
+    },
+    "RAGCreateContextResponse": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "context_id": {
+          "type": "string"
+        }
+      },
+      "title": "RAGCreateContextResponse",
+      "required": [
+        "user_id",
+        "context_id"
+      ]
+    },
+    "RAGCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "interests": {
+          "type": "string"
+        }
+      },
+      "title": "RAGCreateUserRequest",
+      "required": [
+        "username",
+        "token"
+      ]
+    },
+    "RAGCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "title": "RAGCreateUserResponse",
+      "required": [
+        "user_id"
+      ]
+    },
+    "RAGFlushContextRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "context_id": {
+          "type": "string"
+        }
+      },
+      "title": "RAGFlushContextRequest",
+      "required": [
+        "user_id",
+        "context_id"
+      ]
+    },
+    "RAGFlushContextResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "RAGFlushContextResponse",
+      "required": [
+        "status"
+      ]
+    },
+    "RecognitionRequest": {
+      "type": "object",
+      "title": "RecognitionRequest"
+    },
+    "RecognitionResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecognitionResponseItem"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "RecognitionResponse",
+      "required": [
+        "items",
+        "count"
+      ]
+    },
+    "RecognitionResponseItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "title": "RecognitionResponseItem",
+      "required": [
+        "name",
+        "confidence"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

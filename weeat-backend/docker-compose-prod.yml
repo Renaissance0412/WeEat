@@ -1,0 +1,152 @@
+version: '3'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.42.0
+    container_name: weeat-backend-jaeger
+    restart: always
+    # ports:
+    #   - "5775:5775/udp"
+    #   - "6831:6831/udp"
+    #   - "6832:6832/udp"
+    #   - "5778:5778"
+    #   - "16686:16686"
+    #   - "14268:14268"
+    #   - "9411:9411"
+    environment:
+      - SPAN_STORAGE_TYPE=memory # for test
+      # - SPAN_STORAGE_TYPE=elasticsearch
+      # - ES_SERVER_URLS=http://elasticsearch:9200
+      - LOG_LEVEL=debug
+    networks:
+      - weeat_ai
+
+  prometheus:
+    image: prom/prometheus:v2.28.1
+    container_name: weeat-backend-prometheus
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./config/prometheus/prometheus-dev.yml:/etc/prometheus/prometheus.yml
+      - /tmp/weeat/prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: always
+    user: root
+    network_mode: "host"
+    networks:
+      - weeat_ai
+
+  grafana:
+    image: grafana/grafana:8.0.6
+    container_name: weeat-backend-grafana
+    hostname: grafana
+    user: root
+    environment:
+      TZ: Asia/Shanghai
+    restart: always
+    volumes:
+      - /tmp/weeat/grafana/data:/var/lib/grafana
+    networks:
+      - weeat_ai
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.0
+    container_name: weeat-backend-etcd
+    volumes:
+      - /tmp/weeat/etcd:/etcd-data
+    command: >
+      /usr/local/bin/etcd
+        --name node1
+        --data-dir=/etcd-data
+        --listen-client-urls    http://0.0.0.0:2379
+        --listen-peer-urls      http://0.0.0.0:2380
+        --advertise-client-urls http://127.0.0.1:2379
+        --initial-advertise-peer-urls http://127.0.0.1:2380
+        --initial-cluster node1=http://127.0.0.1:2380
+        --auto-compaction-mode=periodic
+        --auto-compaction-retention=30m
+    restart: always
+    networks:
+      - weeat_ai
+
+  api-service:
+    image: weeat-backend-api-service:latest
+    container_name: weeat-backend-api-service
+    restart: always
+    ports:
+      - "8089:8089"
+    networks:
+      - weeat_ai
+
+  asr-service:
+    image: weeat-backend-asr-service:latest
+    container_name: weeat-backend-asr-service
+    volumes:
+      - $HOME/.cache:/root/.cache
+    deploy: # Enable gpu
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    networks:
+      - weeat_ai
+
+  llm-service:
+    image: weeat-backend-llm-service:latest
+    container_name: weeat-backend-llm-service
+    volumes:
+      - $HOME/.cache:/root/.cache
+    deploy: # Enable gpu
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    networks:
+      - weeat_ai
+
+  rag-service:
+    image: weeat-backend-rag-service:latest
+    container_name: weeat-backend-rag-service
+    volumes:
+      - $HOME/.cache:/root/.cache
+    deploy: # Enable gpu
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    networks:
+      - weeat_ai
+
+  recognition-service:
+    image: weeat-backend-recognition-service:latest
+    container_name: weeat-backend-recognition-service
+    volumes:
+      - $HOME/.cache:/root/.cache
+    deploy: # Enable gpu
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    networks:
+      - weeat_ai
+
+networks:
+  weeat_ai:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16

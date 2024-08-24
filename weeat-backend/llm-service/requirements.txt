@@ -1,0 +1,7 @@
+vllm==0.5.4
+grpcio
+grpcio-tools
+loguru
+uuid
+etcd3
+pyyaml

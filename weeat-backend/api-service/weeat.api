@@ -1,0 +1,164 @@
+syntax = "v1"
+
+// RecognitionRequest
+type RecognitionRequest {}
+
+// RecognitionResponseItem
+type RecognitionResponseItem {
+	Name       string  `json:"name"`
+	Confidence float32 `json:"confidence"`
+}
+
+// RecognitionResponse
+type RecognitionResponse {
+	Items []RecognitionResponseItem `json:"items"`
+	Count int32                     `json:"count"`
+}
+
+// ASRRequest
+type ASRRequest {}
+
+// ASRResponse
+type ASRResponse {
+	Transcript string `json:"transcript"`
+}
+
+// ChatMessage
+type ChatMessage {
+	UserId  string `json:"user_id"`
+	Message string `json:"message"`
+}
+
+// ChatMessageRequest
+type ChatMessageRequest {
+	UserId  string        `json:"user_id"`
+	Message string        `json:"message"`
+	History []ChatMessage `json:"history,optional"`
+}
+
+// ChatMessageResponse
+type ChatMessageResponse {
+	Message string `json:"message"`
+}
+
+// RAGChatMessageRequest
+type RAGChatMessageRequest {
+	UserId    string `json:"user_id"`
+	ContextId string `json:"context_id"`
+	Message   string `json:"message"`
+	Addition  string `json:"addition,optional"`
+}
+
+// RAGChatMessageResponse
+type RAGChatMessageResponse {
+	Message string `json:"message"`
+}
+
+// RAGCreateContextRequest
+type RAGCreateContextRequest {
+	UserId string `json:"user_id"`
+}
+
+// RAGCreateContextResponse
+type RAGCreateContextResponse {
+	UserId    string `json:"user_id"`
+	ContextId string `json:"context_id"`
+}
+
+// RAGFlushContextRequest
+type RAGFlushContextRequest {
+	UserId    string `json:"user_id"`
+	ContextId string `json:"context_id"`
+}
+
+// RAGFlushContextResponse
+type RAGFlushContextResponse {
+	Status int32 `json:"status"`
+}
+
+// RAGCreateUserRequest
+type RAGCreateUserRequest {
+	Username  string `json:"username"`
+	Token     string `json:"token"`
+	Interests string `json:"interests,optional"`
+}
+
+// RAGCreateUserResponse
+type RAGCreateUserResponse {
+	UserId string `json:"user_id"`
+}
+
+@server (
+	// jwt:     Auth
+	prefix:  /v1
+	timeout: 60s
+)
+service weeat-api {
+	// Recognitize the image to json output
+	@handler RecognitionHandler
+	post /recognition returns (RecognitionResponse)
+
+	// Recognitize the audio to text output with sync response method
+	@handler ASRSyncHandler
+	post /asr/sync returns (ASRResponse)
+
+	// Recognitize the audio to text output with stream response method
+	@handler ASRStreamHandler
+	post /asr/stream returns (ASRResponse)
+
+	// Directly chat with LLM and sync response method
+	@handler LLMSyncChatHandler
+	post /llm/chat/sync (ChatMessageRequest) returns (ChatMessageResponse)
+
+	// Directly chat with LLM and stream response method
+	@handler LLMStreamChatHandler
+	post /llm/chat/stream (ChatMessageRequest) returns (ChatMessageResponse)
+
+	// Chat with RAG and sync response method
+	@handler RAGSyncChatHandler
+	post /rag/chat/sync (RAGChatMessageRequest) returns (RAGChatMessageResponse)
+
+	// Chat with RAG and stream response method
+	@handler RAGStreamChatHandler
+	post /rag/chat/stream (RAGChatMessageRequest)
+
+	// Create new user and context, return user_id, other request will use user_id as identifier
+	@handler RAGCreateUserHandler
+	post /rag/user (RAGCreateUserRequest) returns (RAGCreateUserResponse)
+
+	// Create a new chat context for user, return context_id, other request will use context_id as identifier
+	@handler RAGCreateContextHandler
+	post /rag/context (RAGCreateContextRequest) returns (RAGCreateContextResponse)
+
+	// Flush the context, return status code 0 if success, this api will close the chat context and flush memory data to db
+	@handler RAGFlushContextHandler
+	post /rag/flush (RAGFlushContextRequest) returns (RAGFlushContextResponse)
+}
+
+// LoginRequest
+type LoginRequest {
+	// UserId
+	UserId string `json:"user_id" binding:"required"`
+	// User device token
+	Token string `json:"token" binding:"required"`
+}
+
+// LoginResponse
+type LoginResponse {
+	// Login token, used for authentication
+	AccessToken string `json:"access_token"`
+	// Access token expire time
+	AccessExpire int64 `json:"access_expire"`
+	// Suggest to refresh token after this time
+	RefreshAfter int64 `json:"refresh_after"`
+}
+
+@server (
+	prefix: /v1
+)
+service weeat-api {
+	// Login with username and token, return a token for authentication
+	@handler LoginHandler
+	post /login (LoginRequest) returns (LoginResponse)
+}
+

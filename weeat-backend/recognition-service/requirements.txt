@@ -1,0 +1,8 @@
+ultralytics==8.2.79
+torch
+grpcio
+grpcio-tools
+loguru
+uuid
+etcd3
+pyyaml
