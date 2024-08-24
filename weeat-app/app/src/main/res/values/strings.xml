@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WeEat</string>
+    <string name="free_music_json">Test</string>
+    <string name="library_json">Test</string>
+    <string name="article_navigation">Test</string>
+    <string name="none">There is nothing here</string>
+    <string name="default_dish_name">Here is the dish name</string>
+    <string name="hello">What are we eating?</string>
+    <string name="encouragement">What did you eat? Show me!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_string">Your personal dietary assistant.</string>
+    <string name="ask_gpt">Enter something…</string>
+    <string name="setting_adv">WeEat under development!</string>
+    <string name="setting_welcome">Welcome ^ ^</string>
+    <string name="talk_record">Press here to speak</string>
+    <string name="talk_recording">Listening…</string>
+    <string name="tip_delete">Left swipe to delete.</string>
+    <string name="message_storage">Record storage item.</string>
+</resources>
