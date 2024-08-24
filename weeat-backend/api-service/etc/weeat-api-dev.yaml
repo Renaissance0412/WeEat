@@ -1,0 +1,27 @@
+Name: weeat-api
+Host: 0.0.0.0
+Port: 8089
+
+JwtAuth:
+  AccessSecret: weeat
+  AccessExpire: 604800
+
+Prometheus:
+  Host: 0.0.0.0
+  Port: 58888
+  Path: /metrics
+
+Telemetry:
+  Name: weeat-api
+  Endpoint: http://127.0.0.1:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+
+ETCD:
+  Hosts:
+    - 127.0.0.1:2379
+
+AIServiceDiscovery:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: weeat-api

@@ -1,0 +1,10 @@
+BCEmbedding==0.1.5
+cachetools==5.3.3
+openai
+PyMySQL
+grpcio
+grpcio-tools
+loguru
+uuid
+etcd3
+pyyaml

@@ -1,0 +1,12 @@
+# Rpc register key
+Name: asr-service.rpc
+ContainerName: asr-service
+Host: 0.0.0.0
+Port: 50051
+
+ASR:
+  MODEL: "small"
+
+ETCD:
+  Host: etcd
+  Port: 2379

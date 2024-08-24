@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option go_package = "./ragservice";
+package rag;
+
+message ChatMessageRequest {
+    string user_id = 1;
+    string context_id = 2;
+    string message = 3;
+    string addition = 4;
+}
+
+message ChatMessageResponse {
+    string message = 1;
+}
+
+message CreateContextRequest {
+    string user_id = 1;
+}
+
+message CreateContextResponse {
+    string user_id = 1;
+    string context_id = 2;
+}
+
+message FlushContextRequest {
+    string user_id = 1;
+    string context_id = 2;
+}
+
+message FlushContextResponse {
+    int32 status = 1;
+}
+
+message CreateUserRequest {
+    string username = 1;
+    string token = 2;
+    string interests = 3;
+}
+
+message CreateUserResponse {
+    string user_id = 1;
+}
+
+message CheckUserRequest {
+    string user_id = 1;
+    string token = 2;
+}
+
+message CheckUserResponse {
+    bool valid = 1;
+}
+
+// Exporty RAG service for client
+service RAGService {
+    // Chat with stream response method
+    rpc StreamChat(ChatMessageRequest) returns (stream ChatMessageResponse);
+    // Chat with sync response method
+    rpc SyncChat(ChatMessageRequest) returns (ChatMessageResponse);
+
+    // Create new user
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    // Check user valid
+    rpc CheckUserValid(CheckUserRequest) returns (CheckUserResponse);
+
+    // Create new chat context
+    rpc CreateChatContext(CreateContextRequest) returns (CreateContextResponse);
+    // Flush chat history to database
+    rpc FlushChatHistory(FlushContextRequest) returns (FlushContextResponse);
+}

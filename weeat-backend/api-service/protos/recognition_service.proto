@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "./recognitionservice";
+package recognition;
+
+message RecognitionRequest {
+    bytes image = 1;
+}
+
+message RecognitionResponseItem {
+    string name = 1;
+    float confidence = 2;
+}
+
+message RecognitionResponse {
+    repeated RecognitionResponseItem items = 1;
+    int32 count = 2;
+}
+
+// Export recognition service for client
+service RecognitionService {
+    // Recognize image and return recognition result
+    rpc Recognize(RecognitionRequest) returns (RecognitionResponse);
+}

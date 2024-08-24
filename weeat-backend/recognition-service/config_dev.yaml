@@ -1,0 +1,14 @@
+# Rpc register key
+Name: recognition-service.rpc
+ContainerName: 127.0.0.1
+Host: 0.0.0.0
+Port: 50041
+
+Recognition:
+  Model: "yolov5m_Objects365.pt"
+  ConfThreshold: 0.25
+  IOUThreshold: 0.45
+
+ETCD:
+  Host: 127.0.0.1
+  Port: 2379
